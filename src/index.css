@@ -1,20 +1,19 @@
 :root {
-  --font-default: "Montserrat", sans-serif;
-  --font-logo: "Sofia", cursive;
+    --ion-background-color: #ffffff;
 
-  --color-green-dark: #0d522c;
-  --color-green-medium: #77bba2;
-  --color-green-light: #77bba260;
+    --color-green-dark: #0d522c;
+    --color-green-medium: #77bba2;
+    --color-green-light: #77bba260;
 
-  --color-beige: #f5f1eb;
-  --color-beige-medium: #F2E8DF;
+    --color-beige: #f5f1eb;
+    --color-beige-medium: #f2e8df;
 
-  --color-burgundy: #db5349;
-  --color-burgundy-light: #E2A49C;
+    --color-burgundy: #db5349;
+    --color-burgundy-light: #e2a49c;
 
-  --color-gray: #222222;
+    --color-gray: #222222;
 }
 
 body {
-  font-family: var(--font-default);
+    font-family: var(--font-default);
 }
