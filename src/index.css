@@ -1,0 +1,20 @@
+:root {
+  --font-default: "Montserrat", sans-serif;
+  --font-logo: "Sofia", cursive;
+
+  --color-green-dark: #0d522c;
+  --color-green-medium: #77bba2;
+  --color-green-light: #77bba260;
+
+  --color-beige: #f5f1eb;
+  --color-beige-medium: #F2E8DF;
+
+  --color-burgundy: #db5349;
+  --color-burgundy-light: #E2A49C;
+
+  --color-gray: #222222;
+}
+
+body {
+  font-family: var(--font-default);
+}
