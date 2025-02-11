@@ -5,13 +5,16 @@ import {
     IonCol,
     IonRow,
     IonButton,
+    IonInputPasswordToggle,
 } from "@ionic/react";
 
 const Login = () => {
     return (
         <IonRow>
             <IonCol>
-                <h1>Ingresar</h1>
+                <article className="ion-text-center">
+                    <h1>Iniciar sesión</h1>
+                </article>
                 <section>
                     <form action="">
                         <IonList>
@@ -26,15 +29,15 @@ const Login = () => {
                             <IonItem>
                                 <IonInput
                                     type="password"
-                                    id="password"
-                                    name="password"
                                     label="Contraseña"
-                                    placeholder="Ingresa una contraseña"></IonInput>
+                                    placeholder="Ingresa tu contraseña">
+                                    <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                                </IonInput>
                             </IonItem>
                         </IonList>
 
-                        <article>
-                            <IonButton>Iniciar Sesión</IonButton>
+                        <article className="ion-text-center">
+                            <IonButton shape="round">Iniciar Sesión</IonButton>
                         </article>
                     </form>
                 </section>
