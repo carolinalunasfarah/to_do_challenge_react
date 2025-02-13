@@ -1,19 +1,18 @@
+// ionic
 import { IonList } from "@ionic/react";
+
+// components
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, toggleComplete, editTask, deleteTask }) => {
+const TaskList = ({ tasks }) => {
     return (
-        <IonList>
-            {tasks.map((task) => (
-                <TaskItem
-                    key={task.id}
-                    task={task}
-                    toggleComplete={toggleComplete}
-                    editTask={editTask}
-                    deleteTask={deleteTask}
-                />
-            ))}
-        </IonList>
+        <>
+            <IonList className="task_list">
+                {tasks.map((task) => (
+                    <TaskItem key={task.id} task={task} />
+                ))}
+            </IonList>
+        </>
     );
 };
 

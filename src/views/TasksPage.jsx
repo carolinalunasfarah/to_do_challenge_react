@@ -1,49 +1,31 @@
+// hooks
+import { useContext } from "react";
+
+// context
+import { TasksContext } from "../context/TasksContext";
+
+// ionic
+import { IonRow } from "@ionic/react";
+
+// components
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 
-import { useState } from "react";
-
 const TasksPage = () => {
-    const [tasks, setTasks] = useState([]);
-
-    const addTask = (title) => {
-        const newTask = {
-            id: tasks.length + 1,
-            title: title,
-            completed: false,
-        };
-        setTasks([...tasks, newTask]);
-    };
-
-    const toggleComplete = (taskId) => {
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === taskId ? { ...task, completed: !task.completed } : task
-        )
-      );
-    };
-
-    const editTask = (taskId, newTitle) => {
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === taskId ? { ...task, title: newTitle } : task
-        )
-      );
-    };
-
-    const deleteTask = (taskId) => {
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-    };
+    const { tasks } = useContext(TasksContext);
 
     return (
         <>
-            <TaskForm addTask={addTask} />
-            <TaskList
-                tasks={tasks}
-                toggleComplete={toggleComplete}
-                editTask={editTask}
-                deleteTask={deleteTask}
-            />
+            <TaskForm />
+            <IonRow className="ion-justify-content-center ion-padding">
+                <h3>Listado de tareas</h3>
+            </IonRow>
+            <IonRow className="ion-justify-content-center">
+                <TaskList
+                    tasks={tasks}
+                    classname="ion-justify-content-center"
+                />
+            </IonRow>
         </>
     );
 };

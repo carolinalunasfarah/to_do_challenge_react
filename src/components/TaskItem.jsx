@@ -1,3 +1,10 @@
+// hooks
+import { useContext, useRef, useState } from "react";
+
+// context
+import { TasksContext } from "../context/TasksContext";
+
+// ionic
 import {
     IonItem,
     IonLabel,
@@ -7,9 +14,10 @@ import {
     IonInput,
 } from "@ionic/react";
 import { createOutline, trashOutline } from "ionicons/icons";
-import { useState, useRef } from "react";
 
-const TaskItem = ({ task, toggleComplete, editTask, deleteTask }) => {
+const TaskItem = ({ task }) => {
+    const { updateStatus, updateTitle, removeTask } = useContext(TasksContext);
+
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title);
     const inputRef = useRef(null);
@@ -23,7 +31,7 @@ const TaskItem = ({ task, toggleComplete, editTask, deleteTask }) => {
 
     const handleEdit = () => {
         if (newTitle.trim() !== "" && newTitle !== task.title) {
-            editTask(task.id, newTitle);
+            updateTitle(task.id, newTitle);
         }
         setIsEditing(false);
     };
@@ -38,7 +46,7 @@ const TaskItem = ({ task, toggleComplete, editTask, deleteTask }) => {
         <IonItem>
             <IonCheckbox
                 checked={task.completed}
-                onIonChange={() => toggleComplete(task.id)}
+                onIonChange={(e) => updateStatus(task.id, e.detail.checked)}
             />
 
             {isEditing ? (
@@ -55,14 +63,18 @@ const TaskItem = ({ task, toggleComplete, editTask, deleteTask }) => {
                 </IonLabel>
             )}
 
-            <IonButton fill="clear" onClick={() => setIsEditing(true)}>
+            <IonButton
+                size="large"
+                fill="clear"
+                onClick={() => setIsEditing(true)}>
                 <IonIcon icon={createOutline} />
             </IonButton>
 
             <IonButton
+                size="large"
                 fill="clear"
                 color="danger"
-                onClick={() => deleteTask(task.id)}>
+                onClick={() => removeTask(task.id)}>
                 <IonIcon icon={trashOutline} />
             </IonButton>
         </IonItem>
