@@ -26,27 +26,23 @@ export const TasksProvider = ({ children }) => {
     }, [user]);
 
     const fetchTasks = async () => {
-        if (!user) return;
-        const tasksData = await getUserTasks(user.email);
-        if (tasksData.lenght === 0) {
-            console.log("Usuario sin tareas:", user.email);
-        }
-        setTasks(tasksData);
-    };
+      if (!user) return;
+      const tasksData = await getUserTasks(user.email);
+  
+      setTasks((prevTasks) => [
+          ...prevTasks,
+          ...tasksData.filter(
+              (newTask) => !prevTasks.some((task) => task.id === newTask.id)
+          ),
+      ]);
+  };
 
     const addNewTask = async (title) => {
         if (!user) return;
         const result = await addTask(title, user.email);
+
         if (result.success) {
-            setTasks([
-                ...tasks,
-                {
-                    id: result.id,
-                    title,
-                    completed: false,
-                    userEmail: user.email,
-                },
-            ]);
+            fetchTasks();
         }
     };
 
@@ -93,6 +89,7 @@ export const TasksProvider = ({ children }) => {
         <TasksContext.Provider
             value={{
                 tasks,
+                fetchTasks,
                 addNewTask,
                 updateStatus,
                 updateTitle,
