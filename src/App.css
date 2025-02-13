@@ -1,9 +1,25 @@
+.cursor_default {
+    cursor: default;
+}
+
+/* Home */
+ion-toast {
+    --background: #f4f4fa;
+    --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --color: #4b4a50;
+}
+
+/* Tasks Page */
 ion-checkbox {
-  --size: 20px;
-  --checkbox-background-checked: #6815ec;
+    --size: 20px;
+    --checkbox-background-checked: #6815ec;
 }
 
 ion-checkbox::part(container) {
-  border-radius: 0.25rem;
-  border: 2px solid #6815ec;
+    border-radius: 0.25rem;
+    border: 2px solid #6815ec;
+}
+
+.task_list {
+    width: 40rem;
 }

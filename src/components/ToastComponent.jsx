@@ -1,3 +1,4 @@
+// ionic
 import { IonToast } from "@ionic/react";
 
 export const ToastComponent = ({ toast, setToast }) => (

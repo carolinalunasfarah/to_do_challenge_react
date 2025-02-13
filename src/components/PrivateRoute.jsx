@@ -1,6 +1,8 @@
+// hooks
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+// context
 import { AuthContext } from "../context/AuthContext";
 
 const PrivateRoute = ({ children }) => {

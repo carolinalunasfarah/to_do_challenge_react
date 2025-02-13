@@ -1,4 +1,7 @@
+// firebase
 import { doc, getDoc, setDoc } from "firebase/firestore";
+
+// firebase config
 import { db } from "../firebaseConfig";
 
 export const createUser = async (name, email) => {

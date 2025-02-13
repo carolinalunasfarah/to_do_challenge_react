@@ -1,3 +1,12 @@
+// hooks
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useToast } from "../hooks/toastAlert";
+
+// context
+import { AuthContext } from "../context/AuthContext";
+
+// ionic
 import {
     IonInput,
     IonItem,
@@ -8,11 +17,7 @@ import {
     IonInputPasswordToggle,
 } from "@ionic/react";
 
-import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-
-import { AuthContext } from "../context/AuthContext";
-import { useToast } from "../hooks/toastAlert";
+// components
 import { ToastComponent } from "./ToastComponent";
 
 // validations
@@ -74,7 +79,7 @@ const Register = () => {
         <>
             <IonRow>
                 <IonCol>
-                    <article className="ion-text-center">
+                    <article className="ion-text-center cursor_default">
                         <h1>Crear cuenta</h1>
                     </article>
                     <section>

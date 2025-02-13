@@ -1,3 +1,15 @@
+// hooks
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../hooks/toastAlert";
+
+// context
+import { AuthContext } from "../context/AuthContext";
+
+// components
+import { ToastComponent } from "./ToastComponent";
+
+// ionic
 import {
     IonInput,
     IonItem,
@@ -7,12 +19,6 @@ import {
     IonButton,
     IonInputPasswordToggle,
 } from "@ionic/react";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-
-import { useToast } from "../hooks/toastAlert";
-import { ToastComponent } from "./ToastComponent";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -54,7 +60,7 @@ const Login = () => {
         <>
             <IonRow>
                 <IonCol>
-                    <article className="ion-text-center">
+                    <article className="ion-text-center cursor_default">
                         <h1>Iniciar sesión</h1>
                     </article>
                     <section>

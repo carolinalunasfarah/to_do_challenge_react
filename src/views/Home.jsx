@@ -1,4 +1,7 @@
+// ionic
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
+
+// components
 import Register from "../components/Register";
 import Login from "../components/Login";
 
@@ -8,22 +11,22 @@ const Home = () => {
             <IonGrid>
                 <IonRow>
                     <IonCol>
-                        <h1 className="ion-text-center">
+                        <h1 className="ion-text-center cursor_default">
                             ¡Te damos la bienvenida!
                         </h1>
                         <article>
-                            <p className="ion-text-center">
+                            <p className="ion-text-center cursor_default">
                                 Esta es una plataforma para que puedas gestionar
                                 tareas
                             </p>
                         </article>
                     </IonCol>
                 </IonRow>
-                <IonRow className="ion-justify-content-evenly forms_height">
-                    <IonCol size="4" className="same-height">
+                <IonRow className="ion-justify-content-evenly">
+                    <IonCol size="4">
                         <Register />
                     </IonCol>
-                    <IonCol size="4" className="same-height">
+                    <IonCol size="4">
                         <Login />
                     </IonCol>
                 </IonRow>
