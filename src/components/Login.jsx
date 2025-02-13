@@ -7,42 +7,95 @@ import {
     IonButton,
     IonInputPasswordToggle,
 } from "@ionic/react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
+import { useToast } from "../hooks/toastAlert";
+import { ToastComponent } from "./ToastComponent";
 
 const Login = () => {
-    return (
-        <IonRow>
-            <IonCol>
-                <article className="ion-text-center">
-                    <h1>Iniciar sesión</h1>
-                </article>
-                <section>
-                    <form action="">
-                        <IonList>
-                            <IonItem>
-                                <IonInput
-                                    type="text"
-                                    id="email"
-                                    name="email"
-                                    label="Email"
-                                    placeholder="Ingresa tu email"></IonInput>
-                            </IonItem>
-                            <IonItem>
-                                <IonInput
-                                    type="password"
-                                    label="Contraseña"
-                                    placeholder="Ingresa tu contraseña">
-                                    <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-                                </IonInput>
-                            </IonItem>
-                        </IonList>
+    const navigate = useNavigate();
+    const { loginUser, userIsLoggedIn } = useContext(AuthContext);
 
-                        <article className="ion-text-center">
-                            <IonButton shape="round">Iniciar Sesión</IonButton>
-                        </article>
-                    </form>
-                </section>
-            </IonCol>
-        </IonRow>
+    const [user, setUser] = useState({});
+
+    const { showToast, toast, setToast } = useToast();
+
+    useEffect(() => {
+        if (userIsLoggedIn) {
+            navigate("/tasks");
+        }
+    }, [userIsLoggedIn, navigate]);
+
+    const handleUser = (event) => {
+        setUser({ ...user, [event.target.name]: event.target.value });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!user.email || !user.password) {
+            showToast("Campos obligatorios");
+            return;
+        }
+
+        try {
+            const success = await loginUser(user);
+            if (success) {
+                navigate(`/tasks`);
+            }
+        } catch (error) {
+            showToast("Error al iniciar sesión");
+        }
+    };
+
+    return (
+        <>
+            <IonRow>
+                <IonCol>
+                    <article className="ion-text-center">
+                        <h1>Iniciar sesión</h1>
+                    </article>
+                    <section>
+                        <form onSubmit={handleSubmit}>
+                            <IonList>
+                                <IonItem>
+                                    <IonInput
+                                        type="text"
+                                        id="loginEmail"
+                                        name="email"
+                                        label="Email"
+                                        value={user.email}
+                                        onChange={handleUser}
+                                        placeholder="Ingresa tu email"></IonInput>
+                                </IonItem>
+                                <IonItem>
+                                    <IonInput
+                                        type="password"
+                                        id="loginPassword"
+                                        name="password"
+                                        value={user.password}
+                                        onChange={handleUser}
+                                        label="Contraseña"
+                                        placeholder="Ingresa tu contraseña">
+                                        <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                                    </IonInput>
+                                </IonItem>
+                            </IonList>
+
+                            <article className="ion-text-center">
+                                <IonButton type="submit" shape="round">
+                                    Iniciar Sesión
+                                </IonButton>
+                            </article>
+                        </form>
+                    </section>
+                </IonCol>
+            </IonRow>
+
+            <ToastComponent toast={toast} setToast={setToast} />
+        </>
     );
 };
 

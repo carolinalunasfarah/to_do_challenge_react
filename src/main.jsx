@@ -18,12 +18,19 @@ import "@ionic/react/css/display.css";
 
 import "./index.css";
 
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { TasksProvider } from "./context/TasksContext.jsx";
+
 setupIonicReact();
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
-            <App />
+            <AuthProvider>
+                <TasksProvider>
+                    <App />
+                </TasksProvider>
+            </AuthProvider>
         </BrowserRouter>
     </StrictMode>
 );
