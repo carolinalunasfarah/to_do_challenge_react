@@ -85,13 +85,18 @@ const Login = () => {
                                         onChange={handleUser}
                                         label="Contraseña"
                                         placeholder="Ingresa tu contraseña">
-                                        <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                                        <IonInputPasswordToggle
+                                            color="dark"
+                                            slot="end"></IonInputPasswordToggle>
                                     </IonInput>
                                 </IonItem>
                             </IonList>
 
                             <article className="ion-text-center">
-                                <IonButton type="submit" shape="round">
+                                <IonButton
+                                    className="btn_login"
+                                    type="submit"
+                                    shape="round">
                                     Iniciar Sesión
                                 </IonButton>
                             </article>

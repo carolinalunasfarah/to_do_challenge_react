@@ -51,6 +51,7 @@ const TaskItem = ({ task }) => {
 
             {isEditing ? (
                 <IonInput
+                    className="input_add_task"
                     ref={inputRef}
                     value={newTitle}
                     onIonInput={handleInputChange}
@@ -67,7 +68,7 @@ const TaskItem = ({ task }) => {
                 size="large"
                 fill="clear"
                 onClick={() => setIsEditing(true)}>
-                <IonIcon icon={createOutline} />
+                <IonIcon className="icon_edit" icon={createOutline} />
             </IonButton>
 
             <IonButton
@@ -75,7 +76,7 @@ const TaskItem = ({ task }) => {
                 fill="clear"
                 color="danger"
                 onClick={() => removeTask(task.id)}>
-                <IonIcon icon={trashOutline} />
+                <IonIcon classname="icon_delete" icon={trashOutline} />
             </IonButton>
         </IonItem>
     );

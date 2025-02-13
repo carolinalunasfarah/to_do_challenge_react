@@ -114,13 +114,18 @@ const Register = () => {
                                         onChange={handleUser}
                                         label="Contraseña"
                                         placeholder="Ingresa una contraseña">
-                                        <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                                        <IonInputPasswordToggle
+                                            color="dark"
+                                            slot="end"></IonInputPasswordToggle>
                                     </IonInput>
                                 </IonItem>
                             </IonList>
 
                             <article className="ion-text-center">
-                                <IonButton shape="round" type="submit">
+                                <IonButton
+                                    className="btn_register"
+                                    shape="round"
+                                    type="submit">
                                     Registrarse
                                 </IonButton>
                             </article>

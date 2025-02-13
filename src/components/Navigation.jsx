@@ -26,12 +26,14 @@ function Navigation() {
     return (
         <IonHeader>
             <IonToolbar>
-                <IonTitle className="cursor_default">Listado de tareas</IonTitle>
+                <IonTitle className="cursor_default text_white">
+                    Listado de tareas
+                </IonTitle>
                 {userIsLoggedIn ? (
-                    <IonButtons slot="primary">
+                    <IonButtons slot="end">
                         <IonButton
-                            fill="solid"
-                            slot="end"
+                            className="btn_logout"
+                            shape="round"
                             onClick={handleLogOut}>
                             Cerrar Sesión
                         </IonButton>

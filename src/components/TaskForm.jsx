@@ -28,6 +28,7 @@ const TaskForm = () => {
             <IonRow className="ion-justify-content-center">
                 <IonCol size="4">
                     <IonInput
+                        color="light"
                         type="text"
                         id="title"
                         name="taskTitle"
@@ -40,7 +41,7 @@ const TaskForm = () => {
                         }></IonInput>
                 </IonCol>
                 <article>
-                    <IonButton type="submit" shape="round">
+                    <IonButton className="btn_add" type="submit" shape="round">
                         Agregar
                     </IonButton>
                 </article>

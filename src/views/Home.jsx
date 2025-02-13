@@ -23,10 +23,10 @@ const Home = () => {
                     </IonCol>
                 </IonRow>
                 <IonRow className="ion-justify-content-evenly">
-                    <IonCol size="4">
+                    <IonCol size="4" className="form_container">
                         <Register />
                     </IonCol>
-                    <IonCol size="4">
+                    <IonCol size="4" className="form_container">
                         <Login />
                     </IonCol>
                 </IonRow>

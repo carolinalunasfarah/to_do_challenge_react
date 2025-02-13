@@ -1,19 +1,9 @@
 :root {
-    --ion-background-color: #ffffff;
+    --ion-background-color: #82b7ba;
 
-    --color-green-dark: #0d522c;
-    --color-green-medium: #77bba2;
-    --color-green-light: #77bba260;
+    --color-text-secondary: #ededed;
 
-    --color-beige: #f5f1eb;
-    --color-beige-medium: #f2e8df;
-
-    --color-burgundy: #db5349;
-    --color-burgundy-light: #e2a49c;
-
-    --color-gray: #222222;
-}
-
-body {
-    font-family: var(--font-default);
+    --color-primary: #305555;
+    --color-secondary: #c0a7cd;
+    --color-tertiary: #afba82;
 }

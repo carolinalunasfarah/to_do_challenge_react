@@ -1,8 +1,43 @@
 .cursor_default {
     cursor: default;
+    color: #212121;
+}
+
+.text_white {
+    color: white;
+}
+
+/* Toolbar */
+ion-toolbar {
+    --background: var(--color-primary);
+    --color: var(--color-text-secondary);
+    padding: 0.5rem !important;
+}
+
+.btn_logout {
+    --background: var(--color-tertiary) !important;
+    --color: var(--color-primary) !important;
+    width: 12rem;
+    margin-right: 2rem !important;
 }
 
 /* Home */
+.form_container {
+    width: 50rem;
+    border-radius: 1rem;
+    border: 2px solid var(--color-primary);
+}
+
+.btn_register {
+    --background: var(--color-secondary);
+    --color: var(--color-primary);
+}
+
+.btn_login {
+    --background: var(--color-tertiary);
+    --color: var(--color-primary);
+}
+
 ion-toast {
     --background: #f4f4fa;
     --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
@@ -10,16 +45,28 @@ ion-toast {
 }
 
 /* Tasks Page */
+/* Task Add Form */
+.btn_add {
+    --background: var(--color-primary);
+    --color: white;
+}
+
+/* Tasks List */
+.task_list {
+    width: 40rem;
+}
+
+/* Tasks Item */
 ion-checkbox {
     --size: 20px;
-    --checkbox-background-checked: #6815ec;
+    --checkbox-background-checked: var(--color-primary);
 }
 
 ion-checkbox::part(container) {
     border-radius: 0.25rem;
-    border: 2px solid #6815ec;
+    border: 2px solid var(--color-primary);
 }
 
-.task_list {
-    width: 40rem;
+ion-icon.icon_edit {
+    color: var(--color-primary);
 }
