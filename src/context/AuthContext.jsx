@@ -68,22 +68,25 @@ export const AuthProvider = ({ children }) => {
     };
 
     const loginUser = async ({ email, password }) => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            const loggedInUser = userCredential.user;
-            setUser(loggedInUser);
-            setUserIsLoggedIn(true);
-            navigate(`/tasks`);
-            return true;
-        } catch (error) {
-            console.error("Error al iniciar sesión", error);
-            return false;
-        }
-    };
+      try {
+          const userCredential = await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+          );
+          const loggedInUser = userCredential.user;
+          setUser(loggedInUser);
+          setUserIsLoggedIn(true);
+          navigate(`/tasks`);
+          return { success: true }; 
+      } catch (error) {
+          console.error("Error al iniciar sesión", error);
+          if (error.code === 'auth/invalid-email') {
+              return { success: false, message: "El correo electrónico ingresado no es válido" };
+          }
+          return { success: false, message: "Error al iniciar sesión" };
+      }
+  };
 
     const logOut = async () => {
         try {

@@ -1,6 +1,6 @@
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 // custom hooks
 import { useToast } from "../hooks/useToast";
 import useFormValidation from "../hooks/useFormValidation";
@@ -73,7 +73,7 @@ const Register = () => {
                     <section>
                         <form onSubmit={handleSubmit}>
                             <IonList>
-                                <IonItem lines="none">
+                                <IonItem lines="none" className="form_item">
                                     <IonInput
                                         type="text"
                                         name="name"
@@ -84,9 +84,9 @@ const Register = () => {
                                         placeholder="Ingresa tu nombre"
                                         helperText={helperText.name}
                                         errorText={errors.name}
-                                        className={
+                                        className={`custom-helper-text ${
                                             errors.name ? "ion-invalid" : ""
-                                        }></IonInput>
+                                        }`}></IonInput>
                                 </IonItem>
                                 <IonItem lines="none">
                                     <IonInput
@@ -99,9 +99,9 @@ const Register = () => {
                                         placeholder="Ingresa tu email"
                                         helperText={helperText.email}
                                         errorText={errors.email}
-                                        className={
+                                        className={`custom-helper-text ${
                                             errors.email ? "ion-invalid" : ""
-                                        }></IonInput>
+                                        }`}></IonInput>
                                 </IonItem>
                                 <IonItem lines="none">
                                     <IonInput
@@ -114,12 +114,13 @@ const Register = () => {
                                         placeholder="Ingresa una contraseña"
                                         helperText={helperText.password}
                                         errorText={errors.password}
-                                        className={
+                                        className={`custom-helper-text ${
                                             errors.password ? "ion-invalid" : ""
-                                        }>
+                                        }`}>
                                         <IonInputPasswordToggle
                                             color="dark"
-                                            slot="end"></IonInputPasswordToggle>
+                                            slot="end"
+                                            ></IonInputPasswordToggle>
                                     </IonInput>
                                 </IonItem>
                             </IonList>

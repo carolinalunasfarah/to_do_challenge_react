@@ -1,7 +1,8 @@
 // hooks
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "../hooks/toastAlert";
+// custom hook
+import { useToast } from "../hooks/useToast";
 
 // context
 import { AuthContext } from "../context/AuthContext";
@@ -47,9 +48,13 @@ const Login = () => {
         }
 
         try {
-            const success = await loginUser(user);
+            const { success, message } = await loginUser(user);
+
             if (success) {
+                showToast("Inicio sesión exitoso");
                 navigate(`/tasks`);
+            } else {
+                showToast(message || "Error al iniciar sesión");
             }
         } catch (error) {
             showToast("Error al iniciar sesión");
@@ -68,6 +73,7 @@ const Login = () => {
                             <IonList>
                                 <IonItem>
                                     <IonInput
+                                        className="custom-helper-text"
                                         type="text"
                                         id="loginEmail"
                                         name="email"
@@ -78,6 +84,7 @@ const Login = () => {
                                 </IonItem>
                                 <IonItem>
                                     <IonInput
+                                        className="custom-helper-text"
                                         type="password"
                                         id="loginPassword"
                                         name="password"

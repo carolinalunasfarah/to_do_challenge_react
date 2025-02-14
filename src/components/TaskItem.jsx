@@ -1,5 +1,7 @@
 // hooks
 import { useContext, useRef, useState } from "react";
+// custom hook
+import { useToast } from "../hooks/useToast";
 
 // context
 import { TasksContext } from "../context/TasksContext";
@@ -15,12 +17,17 @@ import {
 } from "@ionic/react";
 import { createOutline, trashOutline } from "ionicons/icons";
 
+// components
+import { ToastComponent } from "./ToastComponent";
+
 const TaskItem = ({ task }) => {
     const { updateStatus, updateTitle, removeTask } = useContext(TasksContext);
 
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title);
     const inputRef = useRef(null);
+
+    const { showToast, toast, setToast } = useToast();
 
     const handleInputChange = () => {
         const inputElement = inputRef.current;
@@ -32,6 +39,7 @@ const TaskItem = ({ task }) => {
     const handleEdit = () => {
         if (newTitle.trim() !== "" && newTitle !== task.title) {
             updateTitle(task.id, newTitle);
+            showToast("Tarea actualizada");
         }
         setIsEditing(false);
     };
@@ -42,43 +50,60 @@ const TaskItem = ({ task }) => {
         }
     };
 
+    const handleDelete = () => {
+        removeTask(task.id);
+        showToast("Tarea eliminada correctamente");
+    };
+
     return (
-        <IonItem>
-            <IonCheckbox
-                checked={task.completed}
-                onIonChange={(e) => updateStatus(task.id, e.detail.checked)}
-            />
-
-            {isEditing ? (
-                <IonInput
-                    className="input_add_task"
-                    ref={inputRef}
-                    value={newTitle}
-                    onIonInput={handleInputChange}
-                    onBlur={handleEdit}
-                    onKeyDown={handleKeyDown}
+        <>
+            <IonItem>
+                <IonCheckbox
+                    checked={task.completed}
+                    onIonChange={(e) => updateStatus(task.id, e.detail.checked)}
                 />
-            ) : (
-                <IonLabel onClick={() => setIsEditing(true)}>
-                    {task.title}
-                </IonLabel>
-            )}
 
-            <IonButton
-                size="large"
-                fill="clear"
-                onClick={() => setIsEditing(true)}>
-                <IonIcon className="icon_edit" icon={createOutline} />
-            </IonButton>
+                {isEditing ? (
+                    <IonInput
+                        className="input_add_task"
+                        ref={inputRef}
+                        value={newTitle}
+                        onIonInput={handleInputChange}
+                        onBlur={handleEdit}
+                        onKeyDown={handleKeyDown}
+                    />
+                ) : (
+                    <IonLabel
+                        onClick={() => setIsEditing(true)}
+                        className={`task-title ${
+                            task.completed ? "completed" : ""
+                        }`}>
+                        {task.title}
+                    </IonLabel>
+                )}
 
-            <IonButton
-                size="large"
-                fill="clear"
-                color="danger"
-                onClick={() => removeTask(task.id)}>
-                <IonIcon classname="icon_delete" icon={trashOutline} />
-            </IonButton>
-        </IonItem>
+                {isEditing && (
+                    <p className="edit-helper">Presiona Enter para guardar</p>
+                )}
+
+                <IonButton
+                    size="large"
+                    fill="clear"
+                    onClick={() => setIsEditing(true)}>
+                    <IonIcon className="icon_edit" icon={createOutline} />
+                </IonButton>
+
+                <IonButton
+                    size="large"
+                    fill="clear"
+                    color="danger"
+                    onClick={handleDelete}>
+                    <IonIcon classname="icon_delete" icon={trashOutline} />
+                </IonButton>
+            </IonItem>
+
+            <ToastComponent toast={toast} setToast={setToast} />
+        </>
     );
 };
 

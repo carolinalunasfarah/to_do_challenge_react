@@ -33,6 +33,19 @@ ion-toolbar {
     --color: var(--color-primary);
 }
 
+ion-input.custom-helper-text {
+    --placeholder-opacity: 0.5;
+
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+}
+
+ion-input.custom-helper-text.md .input-bottom .helper-text,
+ion-input.custom-helper-text.md .input-bottom {
+    color: var(--color-primary);
+}
+
 .btn_login {
     --background: var(--color-tertiary);
     --color: var(--color-primary);
@@ -46,6 +59,10 @@ ion-toast {
 
 /* Tasks Page */
 /* Task Add Form */
+.form_title {
+  margin-top: 5rem;
+}
+
 .btn_add {
     --background: var(--color-primary);
     --color: white;
@@ -57,6 +74,21 @@ ion-toast {
 }
 
 /* Tasks Item */
+.task-title {
+    transition: opacity ease;
+}
+
+.task-title.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.edit-helper {
+    font-size: 9pt;
+    color: var(--color-primary);
+    margin-top: 4px;
+}
+
 ion-checkbox {
     --size: 20px;
     --checkbox-background-checked: var(--color-primary);

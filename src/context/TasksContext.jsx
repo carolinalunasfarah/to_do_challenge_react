@@ -26,16 +26,17 @@ export const TasksProvider = ({ children }) => {
     }, [user]);
 
     const fetchTasks = async () => {
-      if (!user) return;
-      const tasksData = await getUserTasks(user.email);
-  
-      setTasks((prevTasks) => [
-          ...prevTasks,
-          ...tasksData.filter(
-              (newTask) => !prevTasks.some((task) => task.id === newTask.id)
-          ),
-      ]);
-  };
+        if (!user) return;
+        const tasksData = await getUserTasks(user.email);
+
+        setTasks((prevTasks) => [
+            ...prevTasks,
+            ...tasksData.filter(
+                (newTask) => !prevTasks.some((task) => task.id === newTask.id)
+            ),
+        ]);
+        
+    };
 
     const addNewTask = async (title) => {
         if (!user) return;
