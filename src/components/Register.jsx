@@ -1,7 +1,9 @@
 // hooks
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { useToast } from "../hooks/toastAlert";
+// custom hooks
+import { useToast } from "../hooks/useToast";
+import useFormValidation from "../hooks/useFormValidation";
 
 // context
 import { AuthContext } from "../context/AuthContext";
@@ -20,55 +22,41 @@ import {
 // components
 import { ToastComponent } from "./ToastComponent";
 
-// validations
-const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const nameRegex = /^[A-Za-z\s]+$/i;
-
 const Register = () => {
     const { registerUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const { showToast, toast, setToast } = useToast();
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-    });
-
-    const handleUser = (event) => {
-        const { name, value } = event.target;
-        setUser({ ...user, [name]: value });
-    };
+    const {
+        values,
+        errors,
+        helperText,
+        handleUser,
+        handleBlur,
+        validateField,
+    } = useFormValidation({ name: "", email: "", password: "" });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { email, name, password } = user;
 
-        if (!email || !name || !password) {
-            showToast("Debes rellenar todos los campos");
-            return;
-        }
+        validateField("name", values.name);
+        validateField("email", values.email);
+        validateField("password", values.password);
 
-        if (!nameRegex.test(name)) {
-            showToast("El nombre no puede contener caracteres especiales");
-            return;
-        }
-
-        if (!emailRegex.test(email)) {
-            showToast("El email no es válido");
-            return;
-        }
+        if (errors.name || errors.email || errors.password) return;
 
         try {
-            const success = await registerUser(name, email, password);
+            const success = await registerUser(
+                values.name,
+                values.email,
+                values.password
+            );
             if (success) {
-                if (success) {
-                    showToast("Registro exitoso");
-                    navigate(`/tasks`);
-                } else {
-                    showToast("Error al registrar usuario");
-                }
+                showToast("Registro exitoso");
+                navigate(`/tasks`);
+            } else {
+                showToast("Error al registrar usuario");
             }
         } catch (error) {
             showToast("Hubo un error en el registro");
@@ -85,35 +73,50 @@ const Register = () => {
                     <section>
                         <form onSubmit={handleSubmit}>
                             <IonList>
-                                <IonItem>
+                                <IonItem lines="none">
                                     <IonInput
                                         type="text"
-                                        id="name"
                                         name="name"
-                                        value={user.name}
-                                        onChange={handleUser}
+                                        value={values.name}
+                                        onIonInput={handleUser}
+                                        onIonBlur={handleBlur}
                                         label="Nombre"
-                                        placeholder="Ingresa tu nombre"></IonInput>
+                                        placeholder="Ingresa tu nombre"
+                                        helperText={helperText.name}
+                                        errorText={errors.name}
+                                        className={
+                                            errors.name ? "ion-invalid" : ""
+                                        }></IonInput>
                                 </IonItem>
-                                <IonItem>
+                                <IonItem lines="none">
                                     <IonInput
-                                        type="text"
-                                        id="email"
+                                        type="email"
                                         name="email"
-                                        value={user.email}
-                                        onChange={handleUser}
+                                        value={values.email}
+                                        onIonInput={handleUser}
+                                        onIonBlur={handleBlur}
                                         label="Email"
-                                        placeholder="Ingresa tu email"></IonInput>
+                                        placeholder="Ingresa tu email"
+                                        helperText={helperText.email}
+                                        errorText={errors.email}
+                                        className={
+                                            errors.email ? "ion-invalid" : ""
+                                        }></IonInput>
                                 </IonItem>
-                                <IonItem>
+                                <IonItem lines="none">
                                     <IonInput
                                         type="password"
-                                        id="password"
                                         name="password"
-                                        value={user.password}
-                                        onChange={handleUser}
+                                        value={values.password}
+                                        onIonInput={handleUser}
+                                        onIonBlur={handleBlur}
                                         label="Contraseña"
-                                        placeholder="Ingresa una contraseña">
+                                        placeholder="Ingresa una contraseña"
+                                        helperText={helperText.password}
+                                        errorText={errors.password}
+                                        className={
+                                            errors.password ? "ion-invalid" : ""
+                                        }>
                                         <IonInputPasswordToggle
                                             color="dark"
                                             slot="end"></IonInputPasswordToggle>
