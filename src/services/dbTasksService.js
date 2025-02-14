@@ -15,7 +15,6 @@ import {
 import { db } from "../firebaseConfig";
 
 export const addTask = async (title, userEmail) => {
-    console.log("Adding task with title:", title, "and userEmail:", userEmail);
     if (!title || !userEmail) {
         return {
             success: false,
@@ -30,7 +29,6 @@ export const addTask = async (title, userEmail) => {
             userEmail,
         });
 
-        console.log("Tarea agregada con ID:", newTaskRef.id);
         return { success: true, id: newTaskRef.id };
     } catch (error) {
         console.error("Error al agregar tarea:", error);
@@ -49,7 +47,6 @@ export const getUserTasks = async (userEmail) => {
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-            console.log(`No se encontraron tareas para ${userEmail}`);
             return [];
         }
 
@@ -82,7 +79,6 @@ export const updateTaskStatus = async (taskId, completed) => {
         }
 
         await updateDoc(taskRef, { completed });
-        console.log("Estado tarea actualizada:", taskId);
         return { success: true };
     } catch (error) {
         console.error("Error al actualizar estado de tarea:", error);
@@ -107,7 +103,6 @@ export const updateTaskTitle = async (taskId, title) => {
         }
 
         await updateDoc(taskRef, { title });
-        console.log("Título de tarea actualizada:", taskId);
         return { success: true };
     } catch (error) {
         console.error("Error al actualizar título de tarea:", taskId);
@@ -132,7 +127,6 @@ export const deleteTask = async (taskId) => {
         }
 
         await deleteDoc(taskRef);
-        console.log("Tarea eliminada:", taskId);
         return { success: true };
     } catch (error) {
         console.error("Error al eliminar tarea:", error);

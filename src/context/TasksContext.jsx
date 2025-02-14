@@ -17,6 +17,7 @@ export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
     const { user } = useContext(AuthContext);
+    
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {

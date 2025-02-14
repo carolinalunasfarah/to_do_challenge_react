@@ -25,6 +25,7 @@ const TaskItem = ({ task }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title);
+    
     const inputRef = useRef(null);
 
     const { showToast, toast, setToast } = useToast();
@@ -75,7 +76,7 @@ const TaskItem = ({ task }) => {
                 ) : (
                     <IonLabel
                         onClick={() => setIsEditing(true)}
-                        className={`task-title ${
+                        className={`task_title ${
                             task.completed ? "completed" : ""
                         }`}>
                         {task.title}
@@ -83,7 +84,7 @@ const TaskItem = ({ task }) => {
                 )}
 
                 {isEditing && (
-                    <p className="edit-helper">Presiona Enter para guardar</p>
+                    <p className="edit_helper">Presiona Enter para guardar</p>
                 )}
 
                 <IonButton

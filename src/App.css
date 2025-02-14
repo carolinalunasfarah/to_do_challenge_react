@@ -33,7 +33,7 @@ ion-toolbar {
     --color: var(--color-primary);
 }
 
-ion-input.custom-helper-text {
+ion-input.custom_helper_text {
     --placeholder-opacity: 0.5;
 
     --padding-end: 10px;
@@ -41,9 +41,10 @@ ion-input.custom-helper-text {
     --padding-top: 10px;
 }
 
-ion-input.custom-helper-text.md .input-bottom .helper-text,
-ion-input.custom-helper-text.md .input-bottom {
+ion-input.custom_helper_text.md .input-bottom .helper-text,
+ion-input.custom_helper_text.md .input-bottom {
     color: var(--color-primary);
+    cursor: default;
 }
 
 .btn_login {
@@ -60,7 +61,7 @@ ion-toast {
 /* Tasks Page */
 /* Task Add Form */
 .form_title {
-  margin-top: 5rem;
+    margin-top: 5rem;
 }
 
 .btn_add {
@@ -74,16 +75,16 @@ ion-toast {
 }
 
 /* Tasks Item */
-.task-title {
+.task_title {
     transition: opacity ease;
 }
 
-.task-title.completed {
+.task_title.completed {
     text-decoration: line-through;
     opacity: 0.5;
 }
 
-.edit-helper {
+.edit_helper {
     font-size: 9pt;
     color: var(--color-primary);
     margin-top: 4px;

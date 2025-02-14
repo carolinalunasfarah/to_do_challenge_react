@@ -1,10 +1,17 @@
+// routes
 import { Route, Routes } from "react-router-dom";
-import Home from "./views/Home";
 
-import "./App.css";
+// views
+import Home from "./views/Home";
 import TasksPage from "./views/TasksPage";
+import NotFound from "./views/NotFound";
+
+// components
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
+
+// style
+import "./App.css";
 
 function App() {
     return (
@@ -20,6 +27,7 @@ function App() {
                         </PrivateRoute>
                     }
                 />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </>
     );

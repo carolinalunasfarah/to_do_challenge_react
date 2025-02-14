@@ -84,7 +84,7 @@ const Register = () => {
                                         placeholder="Ingresa tu nombre"
                                         helperText={helperText.name}
                                         errorText={errors.name}
-                                        className={`custom-helper-text ${
+                                        className={`custom_helper_text ${
                                             errors.name ? "ion-invalid" : ""
                                         }`}></IonInput>
                                 </IonItem>
@@ -99,7 +99,7 @@ const Register = () => {
                                         placeholder="Ingresa tu email"
                                         helperText={helperText.email}
                                         errorText={errors.email}
-                                        className={`custom-helper-text ${
+                                        className={`custom_helper_text ${
                                             errors.email ? "ion-invalid" : ""
                                         }`}></IonInput>
                                 </IonItem>
@@ -114,7 +114,7 @@ const Register = () => {
                                         placeholder="Ingresa una contraseña"
                                         helperText={helperText.password}
                                         errorText={errors.password}
-                                        className={`custom-helper-text ${
+                                        className={`custom_helper_text ${
                                             errors.password ? "ion-invalid" : ""
                                         }`}>
                                         <IonInputPasswordToggle
