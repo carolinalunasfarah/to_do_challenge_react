@@ -1,8 +1,15 @@
-# React + Vite
+# Aplicación Lista To-Do 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Arquitectura utilizada
 
-Currently, two official plugins are available:
+## Configuración de Firebase
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Estructura de carpetas y componentes
+
+## Decisiones tomadas
+
+## Desarrollada con 
+
+![Javascript](https://img.shields.io/badge/Javascript-grey?style=for-the-badge&logo=javascript)
+![ReactJS](https://img.shields.io/badge/ReactJS-grey?style=for-the-badge&logo=react)
+![Ionic](https://img.shields.io/badge/Ionic-grey?style=for-the-badge&logo=ionic)
