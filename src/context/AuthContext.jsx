@@ -40,33 +40,31 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const registerUser = async (name, email, password) => {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            const registeredUser = userCredential.user;
-
-            const addUserResult = await createUser(name, email);
-            if (!addUserResult.success) {
-                console.log("Error de registro");
-                return false;
-            }
-
-            setUser(registeredUser);
-            setUserIsLoggedIn(true);
-            navigate(`/tasks`);
-            return true;
-        } catch (error) {
-            if (error.code === "auth/email-already-in-use") {
-                console.error("El email ya está registrado", error.message);
-            } else {
-                console.error("Error al registrar", error.message);
-            }
-            return false;
-        }
-    };
+      try {
+          const userCredential = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+          );
+          const registeredUser = userCredential.user;
+  
+          const addUserResult = await createUser(name, email);
+          if (!addUserResult.success) {
+              return { success: false, message: addUserResult.error };
+          }
+  
+          setUser(registeredUser);
+          setUserIsLoggedIn(true);
+          navigate(`/tasks`);
+          return { success: true };
+      } catch (error) {
+          if (error.code === "auth/email-already-in-use") {
+              return { success: false, message: "El email ya está registrado" };
+          }
+          return { success: false, message: "Error al registrar usuario" };
+      }
+  };
+  
 
     const loginUser = async ({ email, password }) => {
         try {

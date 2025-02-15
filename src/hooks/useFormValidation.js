@@ -10,9 +10,9 @@ const useFormValidation = (initialState) => {
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState({});
     const [helperText, setHelperText] = useState({
-        name: "Solo letras y espacios",
-        email: "Debe ser un email válido",
-        password: "Mínimo 6 caracteres",
+        name: "Nombre obligatorio",
+        email: "Email obligatorio",
+        password: "Contraseña obligatoria",
     });
 
     const validateField = (name, value) => {

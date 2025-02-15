@@ -1,6 +1,6 @@
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useContext} from "react";
+import { useContext } from "react";
 // custom hooks
 import { useToast } from "../hooks/useToast";
 import useFormValidation from "../hooks/useFormValidation";
@@ -47,16 +47,19 @@ const Register = () => {
         if (errors.name || errors.email || errors.password) return;
 
         try {
-            const success = await registerUser(
+            const result = await registerUser(
                 values.name,
                 values.email,
                 values.password
             );
-            if (success) {
+
+            if (result.success) {
                 showToast("Registro exitoso");
                 navigate(`/tasks`);
+            } else if (!values.name || !values.email || !values.password) {
+                showToast("Todos los campos son obligatorios");
             } else {
-                showToast("Error al registrar usuario");
+                showToast(result.message);
             }
         } catch (error) {
             showToast("Hubo un error en el registro");
@@ -119,8 +122,7 @@ const Register = () => {
                                         }`}>
                                         <IonInputPasswordToggle
                                             color="dark"
-                                            slot="end"
-                                            ></IonInputPasswordToggle>
+                                            slot="end"></IonInputPasswordToggle>
                                     </IonInput>
                                 </IonItem>
                             </IonList>
