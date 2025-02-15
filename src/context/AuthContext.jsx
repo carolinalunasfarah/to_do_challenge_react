@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // database user service
-import { createUser } from "../services/dbUserService";
+import { createUser, getUser } from "../services/dbUserService";
 
 // firebase
 import {
@@ -22,17 +22,28 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
+    const [userName, setUserName] = useState("");
+    const [loadingName, setLoadingName] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
                 setUserIsLoggedIn(true);
+                setLoadingName(true);
+
+                const userData = await getUser(user.email);
+                setTimeout(() => {
+                    setUserName(userData?.name || "Usuario");
+                    setLoadingName(false);
+                }, 1000);
             } else {
                 setUser(null);
                 setUserIsLoggedIn(false);
+                setUserName(null);
+                setLoadingName(false);
             }
         });
 
@@ -40,31 +51,34 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const registerUser = async (name, email, password) => {
-      try {
-          const userCredential = await createUserWithEmailAndPassword(
-              auth,
-              email,
-              password
-          );
-          const registeredUser = userCredential.user;
-  
-          const addUserResult = await createUser(name, email);
-          if (!addUserResult.success) {
-              return { success: false, message: addUserResult.error };
-          }
-  
-          setUser(registeredUser);
-          setUserIsLoggedIn(true);
-          navigate(`/tasks`);
-          return { success: true };
-      } catch (error) {
-          if (error.code === "auth/email-already-in-use") {
-              return { success: false, message: "El email ya está registrado" };
-          }
-          return { success: false, message: "Error al registrar usuario" };
-      }
-  };
-  
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            const registeredUser = userCredential.user;
+
+            const addUserResult = await createUser(name, email);
+            if (!addUserResult.success) {
+                return { success: false, message: addUserResult.error };
+            }
+
+            setUser(registeredUser);
+            setUserIsLoggedIn(true);
+            setUserName(name);
+            navigate(`/tasks`);
+            return { success: true };
+        } catch (error) {
+            if (error.code === "auth/email-already-in-use") {
+                return {
+                    success: false,
+                    message: "El email ya está registrado",
+                };
+            }
+            return { success: false, message: "Error al registrar usuario" };
+        }
+    };
 
     const loginUser = async ({ email, password }) => {
         try {
@@ -76,6 +90,12 @@ export const AuthProvider = ({ children }) => {
             const loggedInUser = userCredential.user;
             setUser(loggedInUser);
             setUserIsLoggedIn(true);
+
+            const userData = await getUser(email);
+            if (userData && userData.name) {
+                setUserName(userData.name);
+            }
+
             navigate(`/tasks`);
             return { success: true };
         } catch (error) {
@@ -106,6 +126,8 @@ export const AuthProvider = ({ children }) => {
             value={{
                 user,
                 userIsLoggedIn,
+                userName,
+                loadingName,
                 registerUser,
                 loginUser,
                 logOut,

@@ -15,7 +15,8 @@ import {
 } from "@ionic/react";
 
 function Navigation() {
-    const { logOut, userIsLoggedIn } = useContext(AuthContext);
+    const { logOut, userIsLoggedIn, userName, loadingName } =
+        useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogOut = () => {
@@ -27,7 +28,11 @@ function Navigation() {
         <IonHeader>
             <IonToolbar>
                 <IonTitle className="cursor_default text_white">
-                    Listado de tareas
+                    {userIsLoggedIn
+                        ? loadingName
+                            ? "Cargando..."
+                            : `¡Hola, ${userName}!`
+                        : "Listado de tareas"}
                 </IonTitle>
                 {userIsLoggedIn ? (
                     <IonButtons slot="end">
