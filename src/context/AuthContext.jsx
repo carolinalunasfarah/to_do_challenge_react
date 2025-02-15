@@ -116,6 +116,7 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
             setUserIsLoggedIn(false);
             navigate(`/`);
+            setTasks([])
         } catch (error) {
             console.error("Error al cerrar sesión", error);
         }

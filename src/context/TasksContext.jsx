@@ -17,12 +17,14 @@ export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
     const { user } = useContext(AuthContext);
-    
+
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         if (user) {
             fetchTasks();
+        } else {
+            setTasks([]);
         }
     }, [user]);
 
@@ -36,7 +38,6 @@ export const TasksProvider = ({ children }) => {
                 (newTask) => !prevTasks.some((task) => task.id === newTask.id)
             ),
         ]);
-        
     };
 
     const addNewTask = async (title) => {
