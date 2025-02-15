@@ -78,3 +78,4 @@ Finalmente se utilizan en `dbTasksService.js` y `dbUserService.js` para realizar
 ![Javascript](https://img.shields.io/badge/Javascript-grey?style=for-the-badge&logo=javascript)
 ![ReactJS](https://img.shields.io/badge/ReactJS-grey?style=for-the-badge&logo=react)
 ![Ionic](https://img.shields.io/badge/Ionic-grey?style=for-the-badge&logo=ionic)
+![Firebase](https://img.shields.io/badge/Firebase-grey?style=for-the-badge&logo=firebase)
