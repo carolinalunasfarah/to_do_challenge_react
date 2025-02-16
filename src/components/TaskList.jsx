@@ -31,7 +31,7 @@ const TaskList = () => {
             ) : tasks.length > 0 ? (
                 tasks.map((task) => <TaskItem key={task.id} task={task} />)
             ) : (
-                <IonText className="no-tasks">
+                <IonText>
                     <p>No tienes tareas pendientes 📝</p>
                 </IonText>
             )}

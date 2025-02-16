@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
                 setTimeout(() => {
                     setUserName(userData?.name || "Usuario");
                     setLoadingName(false);
-                }, 1000);
+                }, 500);
             } else {
                 setUser(null);
                 setUserIsLoggedIn(false);

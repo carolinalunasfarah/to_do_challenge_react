@@ -25,7 +25,7 @@ const TaskItem = ({ task }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title);
-    
+
     const inputRef = useRef(null);
 
     const { showToast, toast, setToast } = useToast();
@@ -59,35 +59,41 @@ const TaskItem = ({ task }) => {
     return (
         <>
             <IonItem>
-                <IonCheckbox
-                    checked={task.completed}
-                    onIonChange={(e) => updateStatus(task.id, e.detail.checked)}
-                />
-
-                {isEditing ? (
-                    <IonInput
-                        className="input_add_task"
-                        ref={inputRef}
-                        value={newTitle}
-                        onIonInput={handleInputChange}
-                        onBlur={handleEdit}
-                        onKeyDown={handleKeyDown}
+                <article className="task_title_container">
+                    <IonCheckbox
+                        checked={task.completed}
+                        onIonChange={(e) =>
+                            updateStatus(task.id, e.detail.checked)
+                        }
                     />
-                ) : (
-                    <IonLabel
-                        onClick={() => setIsEditing(true)}
-                        className={`task_title ${
-                            task.completed ? "completed" : ""
-                        }`}>
-                        {task.title}
-                    </IonLabel>
-                )}
 
-                {isEditing && (
-                    <p className="edit_helper">Presiona Enter para guardar</p>
-                )}
+                    {isEditing ? (
+                        <IonInput
+                            ref={inputRef}
+                            value={newTitle}
+                            onIonInput={handleInputChange}
+                            onBlur={handleEdit}
+                            onKeyDown={handleKeyDown}
+                        />
+                    ) : (
+                        <IonLabel
+                            onClick={() => setIsEditing(true)}
+                            className={`task_title ${
+                                task.completed ? "completed" : ""
+                            }`}>
+                            {task.title}
+                        </IonLabel>
+                    )}
+
+                    {isEditing && (
+                        <p className="edit_helper">
+                            Presiona Enter para guardar
+                        </p>
+                    )}
+                </article>
 
                 <IonButton
+                    slot="end"
                     size="large"
                     fill="clear"
                     onClick={() => setIsEditing(true)}>
@@ -95,11 +101,11 @@ const TaskItem = ({ task }) => {
                 </IonButton>
 
                 <IonButton
+                    slot="end"
                     size="large"
                     fill="clear"
-                    color="danger"
                     onClick={handleDelete}>
-                    <IonIcon classname="icon_delete" icon={trashOutline} />
+                    <IonIcon className="icon_delete" icon={trashOutline} />
                 </IonButton>
             </IonItem>
 

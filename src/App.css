@@ -88,12 +88,19 @@ ion-toast {
 .edit_helper {
     font-size: 9pt;
     color: var(--color-primary);
-    margin-top: 4px;
+    margin-top: 0.5rem;
+}
+
+.task_title_container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 ion-checkbox {
-    --size: 20px;
+    --size: 1.2rem;
     --checkbox-background-checked: var(--color-primary);
+    margin-right: 1.5rem;
 }
 
 ion-checkbox::part(container) {
@@ -103,4 +110,8 @@ ion-checkbox::part(container) {
 
 ion-icon.icon_edit {
     color: var(--color-primary);
+}
+
+ion-icon.icon_delete {
+    color: var(--color-delete) !important;
 }
