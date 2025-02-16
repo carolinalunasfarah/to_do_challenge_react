@@ -31,7 +31,7 @@ function Navigation() {
                     {userIsLoggedIn
                         ? loadingName
                             ? "Cargando..."
-                            : `¡Hola, ${userName}!`
+                            : `¡Hola, ${userName} este es tu listado de tareas!`
                         : "Listado de tareas"}
                 </IonTitle>
                 {userIsLoggedIn ? (
