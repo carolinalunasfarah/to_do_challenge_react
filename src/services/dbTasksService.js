@@ -18,7 +18,7 @@ export const addTask = async (title, userEmail) => {
     if (!title || !userEmail) {
         return {
             success: false,
-            error: "El título y el correo son obligatorios.",
+            error: "El título y el correo son obligatorios",
         };
     }
 
@@ -31,7 +31,7 @@ export const addTask = async (title, userEmail) => {
 
         return { success: true, id: newTaskRef.id };
     } catch (error) {
-        console.error("Error al agregar tarea:", error);
+        console.error("Error al agregar tarea", error);
         return { success: false, error: error.message };
     }
 };
@@ -57,7 +57,7 @@ export const getUserTasks = async (userEmail) => {
 
         return tasks;
     } catch (error) {
-        console.error("Error al obtener tareas:", error);
+        console.error("Error al obtener tareas", error);
         return [];
     }
 };
@@ -66,7 +66,7 @@ export const updateTaskStatus = async (taskId, completed) => {
     if (!taskId) {
         return {
             success: false,
-            error: "ID de tarea requerida.",
+            error: "ID de tarea requerida",
         };
     }
 
@@ -75,13 +75,13 @@ export const updateTaskStatus = async (taskId, completed) => {
         const taskSnap = await getDoc(taskRef);
 
         if (!taskSnap.exists()) {
-            return { success: false, error: "La tarea no existe." };
+            return { success: false, error: "La tarea no existe" };
         }
 
         await updateDoc(taskRef, { completed });
         return { success: true };
     } catch (error) {
-        console.error("Error al actualizar estado de tarea:", error);
+        console.error("Error al actualizar estado de tarea", error);
         return { success: false, error: error.message };
     }
 };
@@ -105,14 +105,14 @@ export const updateTaskTitle = async (taskId, title) => {
         await updateDoc(taskRef, { title });
         return { success: true };
     } catch (error) {
-        console.error("Error al actualizar título de tarea:", taskId);
+        console.error("Error al actualizar título de tarea", taskId);
         return { success: false, erorr: error.message };
     }
 };
 
 export const deleteTask = async (taskId) => {
     if (!taskId) {
-        return { success: false, error: "ID de tarea es obligatorio." };
+        return { success: false, error: "ID de tarea es obligatorio" };
     }
 
     try {
@@ -122,14 +122,14 @@ export const deleteTask = async (taskId) => {
         if (!taskSnap.exists()) {
             return {
                 success: false,
-                error: "La tarea no existe o ya fue eliminada.",
+                error: "La tarea no existe o ya fue eliminada",
             };
         }
 
         await deleteDoc(taskRef);
         return { success: true };
     } catch (error) {
-        console.error("Error al eliminar tarea:", error);
+        console.error("Error al eliminar tarea", error);
         return { success: false, error: error.message };
     }
 };

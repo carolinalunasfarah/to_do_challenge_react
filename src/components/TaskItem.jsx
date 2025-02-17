@@ -25,11 +25,14 @@ const TaskItem = ({ task }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(task.title);
-
-    const inputRef = useRef(null);
-
+    
+    // alerts
     const { showToast, toast, setToast } = useToast();
 
+    // create reference for input element
+    const inputRef = useRef(null);
+
+    // get and update input value
     const handleInputChange = () => {
         const inputElement = inputRef.current;
         if (inputElement) {

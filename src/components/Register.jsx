@@ -24,10 +24,13 @@ import { ToastComponent } from "./ToastComponent";
 
 const Register = () => {
     const { registerUser } = useContext(AuthContext);
+    
     const navigate = useNavigate();
 
+    // alerts
     const { showToast, toast, setToast } = useToast();
-
+    
+    // validations
     const {
         values,
         errors,
@@ -76,7 +79,7 @@ const Register = () => {
                     <section>
                         <form onSubmit={handleSubmit}>
                             <IonList>
-                                <IonItem lines="none" className="form_item">
+                                <IonItem lines="none">
                                     <IonInput
                                         type="text"
                                         name="name"

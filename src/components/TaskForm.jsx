@@ -14,8 +14,10 @@ import { ToastComponent } from "./ToastComponent";
 
 const TaskForm = () => {
     const { addNewTask } = useContext(TasksContext);
+
     const [taskTitle, setTaskTitle] = useState("");
 
+    // alerts
     const { showToast, toast, setToast } = useToast();
 
     const handleSubmit = async (e) => {

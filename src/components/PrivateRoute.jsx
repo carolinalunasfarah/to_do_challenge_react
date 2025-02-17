@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const PrivateRoute = ({ children }) => {
     const { userIsLoggedIn } = useContext(AuthContext);
+    
     const navigate = useNavigate();
 
     useEffect(() => {

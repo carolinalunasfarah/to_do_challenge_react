@@ -1,5 +1,7 @@
 // hooks
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+// custom hooks
+import useDelayEffect from "../hooks/useDelayEffect";
 
 // context
 import { TasksContext } from "../context/TasksContext";
@@ -12,15 +14,17 @@ import TaskItem from "./TaskItem";
 
 const TaskList = () => {
     const { tasks } = useContext(TasksContext);
+
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
+    // delay tasks list display
+    useDelayEffect(
+        () => {
             setLoading(false);
-        }, 1500);
-
-        return () => clearTimeout(timer);
-    }, [tasks]);
+        },
+        1500,
+        [tasks]
+    );
 
     return (
         <IonList className="task_list">

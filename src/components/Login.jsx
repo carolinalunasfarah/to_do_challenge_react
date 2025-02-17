@@ -22,11 +22,13 @@ import {
 } from "@ionic/react";
 
 const Login = () => {
-    const navigate = useNavigate();
     const { loginUser, userIsLoggedIn } = useContext(AuthContext);
 
     const [user, setUser] = useState({});
 
+    const navigate = useNavigate();
+
+    // alerts
     const { showToast, toast, setToast } = useToast();
 
     useEffect(() => {
@@ -73,7 +75,7 @@ const Login = () => {
                             <IonList>
                                 <IonItem>
                                     <IonInput
-                                        className="custom-helper-text"
+                                        className="custom_helper_text"
                                         type="text"
                                         id="loginEmail"
                                         name="email"
@@ -84,7 +86,7 @@ const Login = () => {
                                 </IonItem>
                                 <IonItem>
                                     <IonInput
-                                        className="custom-helper-text"
+                                        className="custom_helper_text"
                                         type="password"
                                         id="loginPassword"
                                         name="password"

@@ -1,6 +1,8 @@
 // hooks
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// custom hooks
+import useDelayEffect from "../hooks/useDelayEffect";
 
 // context
 import { AuthContext } from "../context/AuthContext";
@@ -14,10 +16,22 @@ import {
     IonButton,
 } from "@ionic/react";
 
-function Navigation() {
+const Navigation = () => {
     const { logOut, userIsLoggedIn, userName, loadingName } =
         useContext(AuthContext);
+
+    const [displayName, setDisplayName] = useState("Cargando...");
+
     const navigate = useNavigate();
+
+    // delay user name display
+    useDelayEffect(
+        () => {
+            setDisplayName(userName || "Usuario");
+        },
+        1500,
+        [loadingName, userName]
+    );
 
     const handleLogOut = () => {
         logOut();
@@ -31,7 +45,7 @@ function Navigation() {
                     {userIsLoggedIn
                         ? loadingName
                             ? "Cargando..."
-                            : `¡Hola, ${userName} este es tu listado de tareas!`
+                            : `¡Hola, ${displayName} este es tu listado de tareas!`
                         : "Listado de tareas"}
                 </IonTitle>
                 {userIsLoggedIn ? (
@@ -47,6 +61,6 @@ function Navigation() {
             </IonToolbar>
         </IonHeader>
     );
-}
+};
 
 export default Navigation;

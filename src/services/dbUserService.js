@@ -46,7 +46,7 @@ export const getUser = async (email) => {
             return { success: false, error: "No existe el usuario" };
         }
     } catch (error) {
-        console.error("Error al obtener usuario:", error);
+        console.error("Error al obtener usuario", error);
         return { success: false, error: error.message };
     }
 };

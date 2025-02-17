@@ -22,7 +22,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
-    
+
     const [userName, setUserName] = useState("");
     const [loadingName, setLoadingName] = useState(false);
 
@@ -36,10 +36,8 @@ export const AuthProvider = ({ children }) => {
                 setLoadingName(true);
 
                 const userData = await getUser(user.email);
-                setTimeout(() => {
-                    setUserName(userData?.name || "Usuario");
-                    setLoadingName(false);
-                }, 500);
+                setUserName(userData?.name || "Usuario");
+                setLoadingName(false);
             } else {
                 setUser(null);
                 setUserIsLoggedIn(false);
@@ -89,6 +87,7 @@ export const AuthProvider = ({ children }) => {
                 password
             );
             const loggedInUser = userCredential.user;
+            
             setUser(loggedInUser);
             setUserIsLoggedIn(true);
 
@@ -117,7 +116,7 @@ export const AuthProvider = ({ children }) => {
             setUser(null);
             setUserIsLoggedIn(false);
             navigate(`/`);
-            setTasks([])
+            setTasks([]);
         } catch (error) {
             console.error("Error al cerrar sesión", error);
         }
